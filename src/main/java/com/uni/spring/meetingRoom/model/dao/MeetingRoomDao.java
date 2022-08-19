@@ -23,31 +23,31 @@ public class MeetingRoomDao {
 		return (ArrayList) sqlsession.selectList("MeetingRoomMapper.selectList", userCNo);
 	}
 
-	// 회의실 추가
+	//회의실 추가
 	public int insertMeetingRoom(SqlSessionTemplate sqlsession, MeetingRoom m) {
 
 		return sqlsession.insert("MeetingRoomMapper.insertMeetingRoom", m);
 	}
 
-	// 회의실번호 중복체크
+	//회의실번호 중복체크
 	public int roomNoCheck(SqlSessionTemplate sqlsession, String roomNo) {
 
 		return sqlsession.selectOne("MeetingRoomMapper.roomNoCheck", roomNo);
 	}
 
-	// 회의실 삭제
+	//회의실 삭제
 	public int deleteMeetingRoom(SqlSessionTemplate sqlsession, String roomNo) {
 
 		return sqlsession.delete("MeetingRoomMapper.deleteMeetingRoom", roomNo);
 	}
 
-	// 페이징 처리용
+	//페이징 처리용
 	public int selectRoomListCount(SqlSessionTemplate sqlsession, int userCNo) {
 
 		return sqlsession.selectOne("MeetingRoomMapper.selectRoomListCount", userCNo);
 	}
 
-	// 페이징 처리용
+	//페이징 처리용
 	public ArrayList<MeetingRoom> selectRoomList(SqlSessionTemplate sqlsession, PageInfo pi, int userCNo) {
 
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
@@ -55,7 +55,7 @@ public class MeetingRoomDao {
 		return (ArrayList) sqlsession.selectList("MeetingRoomMapper.selectRoomList", userCNo, rowBounds);
 	}
 
-	// 로그인유저 소속 회사의 총 회의실 목록
+	//로그인유저 소속 회사의 총 회의실 목록
 	public ArrayList<MeetingRoom> selectList(SqlSessionTemplate sqlsession, int userCNo) {
 
 		return (ArrayList) sqlsession.selectList("MeetingRoomMapper.selectRoomList", userCNo);

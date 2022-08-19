@@ -7,21 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="resources/assets/css/bootstrap.css">
-<link rel="stylesheet" href="resources/assets/vendors/iconly/bold.css">
-<link rel="stylesheet" href="resources/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-<link rel="stylesheet" href="resources/assets/vendors/bootstrap-icons/bootstrap-icons.css">
-<link rel="stylesheet" href="resources/assets/css/app.css">
-<link rel="shortcut icon" href="resources/assets/images/favicon.svg" type="image/x-icon">  -->
-
-<!-- Popper JS -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
-
-<!-- Latest compiled JavaScript -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-
 <style>
 tr, th {
 	text-align: center;
@@ -581,9 +566,7 @@ tr, th {
 					$('input[name=dateD]').attr('value', date);
 					$('input[name=roomNoD]').attr('value', roomno);
 					$('input[name=startTimeD]').attr('value', stTime);
-					//console.log($("#dateD").val())
-					//console.log($("#roomNoD").val())
-					//console.log($("#startTimeD").val())		
+		
 					$('#hiddenForm').submit();
 				}
 				

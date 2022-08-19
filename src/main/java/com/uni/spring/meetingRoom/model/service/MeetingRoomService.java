@@ -10,8 +10,6 @@ public interface MeetingRoomService {
 
 	int selectRoomSetUser(String roomsetUserId);
 
-	// ArrayList<Meetingroom> selectList(PageInfo pi, int userCNo);
-
 	int insertMeetingRoom(MeetingRoom m);
 
 	int selectRoomListCount(int userCNo);
@@ -20,26 +18,23 @@ public interface MeetingRoomService {
 
 	ArrayList<MeetingRoom> selectList(int userCNo);
 
-	// 회의실 번호 중복체크
+	//회의실 번호 중복체크
 	int roomNoCheck(String roomNo);
 
-	// 회의실 하나 삭제
-	// int deleteMeetingroom(String roomNo);
-
-	// 회의실 삭제
+	//회의실 삭제
 	int deleteRooms(String roomNo);
 
 	double selectStartKey(String startTime);
 
 	double selectEndKey(String endTime);
 
-	// 회의실 예약
+	//회의실 예약
 	int reserveRoom(ReserveRoom room);
 
-	// 회의실 예약시 roomNo 얻기
+	//회의실 예약시 roomNo 얻기
 	String selectRoomNo(String selectRoom);
 
-	// 회의실 예약시 이미 예약된 목록 얻기
+	//회의실 예약시 이미 예약된 목록 얻기
 	ArrayList<ReserveRoom> checkReservedRooms(String roomNo, String date);
 
 	ArrayList<ReserveRoom> selectReservedRooms(int cNo, String date);

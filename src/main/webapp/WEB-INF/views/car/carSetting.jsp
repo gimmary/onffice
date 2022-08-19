@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.uni.spring.car.model.dto.*" %>  
+<%@ page import="com.uni.spring.car.model.dto.*"%>
 <%
-	String notice = (String)request.getAttribute("notice");
+String notice = (String) request.getAttribute("notice");
 %>
 <!DOCTYPE html>
 <head>
@@ -85,7 +85,7 @@ tr, th {
 	<div id="app">
 
 		<div id="main">
-			<!-- 화면작아졌을때 메뉴바 토글버튼 -->
+			<!-- 화면 작아졌을때 메뉴바 토글버튼 -->
 			<header class="mb-3">
 				<a href="#" class="burger-btn d-block d-xl-none"> <i
 					class="bi bi-justify fs-3"></i>
@@ -246,72 +246,27 @@ tr, th {
 														</div>
 													</div>
 
-													<!-- 공지등록 -->
-													<!-- <div class="card-content" id="noticeMenu">
-														<div class="card-body">
-															<form class="form" action="carNotice.do">
-																<div class="form-body">
-																	<div class="row">														
-																		<div class="form-group">
-																			<textarea id="carNotice" class="form-control" name="carNotice"
-																				placeholder="공지를 작성해주세요."></textarea>
-																		</div>								
-																		<div class="col-sm-12 d-flex justify-content-end">
-																			<button type="submit" class="btn btn-primary me-1 mb-1">저장</button>
-																			<button type="reset" class="btn btn-light-secondary me-1 mb-1">지우기</button>
-																		</div>
-																	</div>
-																</div>
-															</form>
-														</div>
-													</div> -->
-													
-													<!-- <div class="card-content" id="noticeMenu">
-														<div class="card-body">
-															<c:forEach items="${ noticeView }" var="n">
-															<form class="form">
-																<div class="form-body">
-																	<div class="row">														
-																		<div class="form-group">
-																			<c:choose>
-																				<c:when test="${ not empty n }">
-																				<textarea id="carNotice" class="form-control" name="carNotice"
-																				placeholder="공지를 작성해주세요.">${ noticeView }</textarea>
-																				</c:when>
-																				<c:otherwise>
-																				<textarea id="carNotice" class="form-control" name="carNotice"
-																				placeholder="공지를 작성해주세요."></textarea>
-																				</c:otherwise>
-																			</c:choose>			
-																		</div>								
-																		<div class="col-sm-12 d-flex justify-content-end">
-																			<button type="button" class="btn btn-primary me-1 mb-1" id="insertNotice">저장</button>
-																			<button type="reset" class="btn btn-light-secondary me-1 mb-1">지우기</button>
-																		</div>
-																	</div>
-																</div>
-															</form>
-															</c:forEach>
-														</div>
-													</div> -->
-													
+													<!-- 공지 등록 -->
 													<div class="card-content" id="noticeMenu">
 														<div class="card-body">
 															<form class="form">
 																<div class="form-body">
-																	<div class="row">														
+																	<div class="row">
 																		<div class="form-group">
-																				<textarea id="carNotice" class="form-control" name="carNotice"
-																				placeholder="공지를 작성해주세요.">${ noticeView }</textarea>	
-																		</div>								
+																			<textarea id="carNotice" class="form-control"
+																				name="carNotice" placeholder="공지를 작성해주세요.">${ noticeView }</textarea>
+																		</div>
 																		<div class="col-sm-12 d-flex justify-content-end">
-																			<button type="button" class="btn btn-primary me-1 mb-1" id="insertNotice">저장</button>
-																			<button type="reset" class="btn btn-light-secondary me-1 mb-1" id="resetNotice">지우기</button>
+																			<button type="button"
+																				class="btn btn-primary me-1 mb-1" id="insertNotice">저장</button>
+																			<button type="reset"
+																				class="btn btn-light-secondary me-1 mb-1"
+																				id="resetNotice">지우기</button>
 																		</div>
 																	</div>
 																</div>
 															</form>
-															
+
 														</div>
 													</div>
 												</div>
@@ -339,50 +294,57 @@ tr, th {
 				let value = $('#selectCarMenu').val();
 
 				if (value == 'car') {
-					$('#carMenu').css({'display' : 'block'})
-					$('#noticeMenu').css({'display' : 'none'})
+					$('#carMenu').css({
+						'display' : 'block'
+					})
+					$('#noticeMenu').css({
+						'display' : 'none'
+					})
 
 				} else if (value == 'notice') {
-					$('#carMenu').css({'display' : 'none'})
-					$('#noticeMenu').css({'display' : 'block'})
+					$('#carMenu').css({
+						'display' : 'none'
+					})
+					$('#noticeMenu').css({
+						'display' : 'block'
+					})
 
 				}
 			})
 		})
 
-		$(function(){
-			$('#insertNotice').click(function(){
-				
+		$(function() {
+			$('#insertNotice').click(function() {
+
 				let notice = $('#carNotice').val();
 				console.log(notice);
-				
+
 				$.ajax({
-					url:"carNotice.do",
-					data: {
-						notice: notice
+					url : "carNotice.do",
+					data : {
+						notice : notice
 					},
-					type: "post",
-					success: function(n){
+					type : "post",
+					success : function(n) {
 						console.log(n);
 						console.log('성공');
 						//$('#carNotice').val() = n;
 						alert('공지를 저장하였습니다.');
 					},
-					error: function(){
+					error : function() {
 						console.log('실패');
 					}
-					
+
 				})
 			})
 		})
-		
-		$(function(){
-			$('#resetNotice').click(function(){
+
+		$(function() {
+			$('#resetNotice').click(function() {
 				$('#carNotice').empty();
 			})
 		})
-		
-		
+
 		//체크박스 전체체크, 해제
 		$(function() {
 			$("#checkbox-Top").click(function() {
@@ -488,30 +450,11 @@ tr, th {
 					})
 
 				} else {
-					$("#car_no_check").css("color", "red")
-							.text("차량번호를 입력해주세요.");
+					$("#car_no_check").css("color", "red").text("차량번호를 입력해주세요.");
 				}
 
 			})
 		})
-
-		//차량번호 정규식
-		/* $(function(){
-			$('#car_no').blur(function(){
-				
-				let carNo = /^\d{2,3}[가-힣]{1}\s{1}\d{4}$/;
-				
-				if((carNo).test($('#car_no').val())){
-					console.log("true");
-					$('#car_no_check').css('color', 'green').text("올바른 형식입니다.");
-					$('#addCar').attr("disabled", false);
-				}else{
-					$('#car_no_check').css('color', 'red').text("올바른 형식이 아닙니다.");
-					$('#addCar').attr("disabled", true);
-					//return false;
-				}
-			})
-		}) */
 
 		//차량번호 중복검사 & 형식 검사
 		function carNoCheckValidate(num) {
@@ -524,22 +467,19 @@ tr, th {
 				$("#car_no_check").css("color", "green").text("사용가능한 차량번호입니다.");
 
 				$('#car_no').blur(
-					function() {
+						function() {
 
-						let carNo = /^\d{2,3}[가-힣]{1}\s{1}\d{4}$/;
+							let carNo = /^\d{2,3}[가-힣]{1}\s{1}\d{4}$/;
 
-						if ((carNo).test($('#car_no').val())) {
-							console.log("true");
-							$('#car_no_check').css('color', 'green').text(
-									"올바른 형식입니다.");
-							$('#addCar').attr("disabled", false);
-						} else {
-							$('#car_no_check').css('color', 'red').text(
-									"올바른 형식이 아닙니다.");
-							$('#addCar').attr("disabled", true);
-							//return false;
-						}
-					})
+							if ((carNo).test($('#car_no').val())) {
+								console.log("true");
+								$('#car_no_check').css('color', 'green').text("올바른 형식입니다.");
+								$('#addCar').attr("disabled", false);
+							} else {
+								$('#car_no_check').css('color', 'red').text("올바른 형식이 아닙니다.");
+								$('#addCar').attr("disabled", true);
+							}
+						})
 			}
 		}
 
@@ -548,7 +488,6 @@ tr, th {
 			$(this).find("form")[0].reset();
 			$("#room_no_check").empty();
 		})
-				
 	</script>
 
 	<c:if test="${ !empty msg }">

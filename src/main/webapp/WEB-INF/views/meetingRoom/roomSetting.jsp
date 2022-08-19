@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-//로그인유저 세션에서 받아와서 그 사람 회사번호 뿌리고, 그거 회사번호 텍스트 태그에 반영하기
-%>
+
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
@@ -269,9 +267,7 @@ th {
 															</div>
 														</div>	
 															
-														</div>
-														
-																									
+														</div>														
 													</div>	
 												</div>
 											</div>
@@ -309,43 +305,8 @@ th {
 			})
 		})
 		
-		//체크박스 전체체크, 해제
-		/* $(function(){
-			$("#checkbox-Top").click(function(){
-				if($("#checkbox-Top").is(":checked")){
-					$(".form-check-input").prop("checked", true);			
-				}else{
-					$(".form-check-input").prop("checked", false);
-				}
-			})
-			
-			if($(".form-check-input").is(":unchecked")){
-				$("#checkbox-Top").prop("checked", false);
-			}
-		}) */
-		
-		//체크박스 하나 해제시 최상단 체크박스도 해제... 왜안돼?
-		/* $(function(){
-			$("input[name='under-checkbox']").click(function(){
-				if($("input[name='under-checkbox']").is(":unchecked")){
-					$("#checkbox-Top").prop("checked", false);
-				}
-			})
-		})*/ 
-		
-			
-		/* let checkbox_top = $("#checkbox-Top");
-		let checkbox = $(".form-check-input");
-	
-		for(let i = 0; i < checkbox.length; i++){
-			if(checkbox.attr("checked", false)){
-				$("#checkbox_top").prop("checked", false);
-			}
-		} */
-			
-				
-		//회의실 추가 모달에서 Controller로 데이터 넘기기 -> 성공
-		//Controller에서 데이터 받고 화면에 뿌리기 -> 페이지 새로고침 메소드 추가, 성공
+		//회의실 추가 모달에서 Controller로 데이터 넘기기
+		//Controller에서 데이터 받고 화면에 뿌리기
 		$(function() {
 			$("#addRoom").click(function() {
 				let addRoomNo = $("#room_no").val();
@@ -390,38 +351,6 @@ th {
 			})
 		})
 		
-		//회의실 삭제 -> 한개만 삭제할 떄 코드
-		/* $(function() {
-			$("#deleteRoom").click(function() {							
-				let checkedBox = $("#checkbox:checked") //제목행은 아이디 다르게 줘서 삭제되지 않게
-				let checkedRow = checkedBox.parent().parent(); //tr
-				console.log(checkedRow);
-						
-				let roomNo = checkedRow.children().eq(1).text(); //val()은 안되고 text()는 되네... 차이점은?
-				console.log(roomNo);
-	
-				checkedRow.remove();
-				console.log("행 삭제 완료");
-				
-				$.ajax({
-					url : "deleteRoom.do",
-					data : {
-						roomNo : roomNo,
-					},
-					type : "post",
-					success : function(obj) {
-						alert("회의실을 삭제하였습니다.");
-						console.log(obj)
-					
-						location.reload();		
-					},
-					error : function(error) {
-						alert("회의실 삭제에 실패하였습니다.");
-					}
-				})					
-			})
-		}) */
-		
 		//회의실 삭제
 		$(function() {
 			$("#deleteRoom").click(function() {
@@ -452,35 +381,7 @@ th {
 				})
 			})
 		})
-		
-		/* $(function() {
-			$("#deleteRoom").click(function() {			
-				let checkedArr = [];
-				$("#checkbox").each(function(i){   //each() : 모든 $("#checkbox") 요소를 검사함
-					
-					//배열에 체크된 행의 회의실번호 담기... i 
-					//checkedArr.push($('#checkbox:checked:eq(' + i + ')').next().val());
-					checkedArr.push($('#checkbox:checked:parent:parent:eq(' + i + ')').next().text());
-					console.log("넘어갈 배열 : " + checkedArr);
-				})
-					
-				$.ajax({
-					url: "deleteRooms.do",
-					type: "post",
-					dataType: 'json',
-					data: {
-						checkedRoomNo: checkedArr
-					},
-					success: function(data){
-						location.reload();
-					},
-					error: function(){
-						alert("회의실 삭제에 실패하였습니다.");
-					}
-				})		
-			})
-		}) */
-		
+	
 		//회의실번호 중복체크
 		$(function(){
 			let roomNoCheck = $("#room_no");
@@ -520,8 +421,7 @@ th {
 		}
 		
 	//모달 닫을 시 내용 초기화
-	//수동 모달 닫기와 데이터 초기화가 안 먹힘
-	//모달창이 두개여서?
+	//수동 모달 닫기와 데이터 초기화
 	$("#myModal").on("hidden.bs.modal", function(e) {
 		$(this).find("form")[0].reset();
 		$("#room_no_check").empty();
@@ -543,8 +443,8 @@ th {
 				success: function(data){
 					console.log("성공");
 					const roomObj = JSON.parse(data);	
-					console.log(roomObj)
-					//let roomNo = roomObj.roomNo;
+					console.log(roomObj);
+
 					let roomName = roomObj.roomName;
 					let roomCapa = roomObj.roomCapa;
 					let roomNote = roomObj.roomNote;

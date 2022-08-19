@@ -7,15 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="resources/assets/css/bootstrap.css">
-<link rel="stylesheet" href="resources/assets/vendors/iconly/bold.css">
-<link rel="stylesheet" href="resources/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-<link rel="stylesheet" href="resources/assets/vendors/bootstrap-icons/bootstrap-icons.css">
-<link rel="stylesheet" href="resources/assets/css/app.css">
-<link rel="shortcut icon" href="resources/assets/images/favicon.svg" type="image/x-icon">  -->
-
 <!-- jQuery library -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -259,19 +250,6 @@ tr, th {
 	</div>
 
 	<script>
-		
-	/* $(function(){
-		$('#able').click(function(){			
-			let ableBtn = $('#able');				
-			//현재 행
-			let row = $(this).closest('tr');
-			let carNo = row.find('th:eq(1)').text();
-			console.log("차량번호 : ", carNo);
-			
-			$('#reserveCarNo').attr('value', carNo);
-		})
-	}) */
-	
 	//차량 대여시 차량번호 자동입력. id는 고유값이므로 name 등 다른값으로 찾아야 함
 	$(function(){
 		$("[name='ableBtn']").click(function(){
@@ -284,24 +262,9 @@ tr, th {
 		})
 	})
 		
-	//차량 사용일자 빈칸
-	/* $(function(){
-		var required = $('#useDate').filter('[required]:empty');
-		if(required.size() > 0) {
-			$('#useDate').focus();
-			$('#useDate').innerHTML = "사용일자를 입력하세요";
-		}
-	}) */
-		
 	//차량 대여
 	$(function(){
 		$('#addCar').click(function(){
-	
-			//예약할 차량번호
-			/* let ableBtn = $('#able');
-			let row = $(this).closest('tr');
-			let carNo = row.find('th:eq(1)').text();
-			console.log("차량번호 : ", carNo); */
 			
 			let reserveDate = $('#reserveDate').val();
 			let reserveCarNo = $('#reserveCarNo').val();
@@ -328,10 +291,7 @@ tr, th {
 					type: 'post',
 					success: function(userNo){
 						console.log('성공');
-						alert('차량을 예약하였습니다.');
-						//console.log(userNo);
-						//console.log(${userNo})
-						
+						alert('차량을 예약하였습니다.');				
 						location.reload();			
 					},
 					error: function(){
@@ -361,7 +321,6 @@ tr, th {
 				success: function(data){		
 					console.log('성공');
 					const carObj = JSON.parse(data);	
-					//console.log(data);
 					
 					let reserveDate = carObj.reserveDate;
 					let reserveCarNo = carObj.reserveCarNo;
@@ -377,8 +336,7 @@ tr, th {
 					$('#reserveMember-return').attr('value', reserveMName + " " + reserveJName);
 					$('#reserveCarNo-return').attr('value', reserveCarNo);
 					$('#useDate-return').attr('value', useDate);
-					//$('#useNote-return').attr('text', useNote);
-					//$('#useNote-return').innerHTML = useNote;
+	
 					document.getElementById('useNote-return').value = useNote;
 					
 					//로그인유저와 예약자 동일하지 않을 시 반납버튼 비활성화

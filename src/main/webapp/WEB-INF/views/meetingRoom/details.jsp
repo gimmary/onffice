@@ -92,40 +92,7 @@
 							<div class="card-body">
 								<div class="card-content">
 									<div class="card-body" id="inner-card-body">
-
-										<!-- //히든태그 value에 예약번호 받기 //수정, 삭제에 사용할 것
-										<input type="hidden" id="reserveNo" value="">
-										
-										<h3>예약한 회의실명 받기 ex)대회의실</h3>
-										<br>
-										
-										//value에 예약한 날짜 받기
-										<h5>예약일</h5>
-										<div><input type="date" value="2022-06-07"> </div>
-										<br>
-									
-										//value에 예약한 시간 받기
-										<h5>예약시간</h5>
-										<input type="time" id="startTime" value="08:00"> ~ <input type="time" id="endTime" value="08:00"> <input type="checkbox" class="form-check-input" id="allTime"> 종일
-										<br><br>
-										
-										<h5>회의명</h5>
-										<input type="text" class="form-control" id="reserveTitle" value="오늘 점심 뭐먹을까?">
-										<br>
-										
-										//value에 예약자 받기
-										<h5>예약자</h5>
-										<input type="text" class="form-control" id="reserveUser" value="김말이 사원"
-										readonly>
-										<br>
-										
-										<div id="btns">
-										<button class="btn btn-primary" id="modifyReservation()">수정</button>
-										<button class="btn btn-danger" id="deleteReservation()">삭제</button>
-										<button class="btn btn-light" onclick="history.back(-1)">돌아가기</button>
-										</div> -->
-
-
+	
 										<form id="detailView" action="deleteReservation.do" method="post">
 
 											<!-- hidden태그 value에 예약번호 받음. 수정, 삭제에 사용 -->
@@ -150,8 +117,6 @@
 
 											<!-- 예약한 시간 -->
 											<h5>예약시간</h5>
-											<!-- <input type="time" id="startTime" value="${ room.startTime }"> ~ <input type="time" id="endTime" value="${ room.endTime }"> <input type="checkbox" class="form-check-input"> 종일  -->
-											<!-- <h5>${ room.startTime }~${ room.endTime }</h5>  -->
 											<div id="selectTimeDiv">
 											<div id="selectStartTime">
 											<select id="startTime" class="form-control" required>
@@ -261,17 +226,7 @@
 	</div>
 
 	<script>
-		//종일 체크박스
-		/* $(function() {
-			$("#allTime").click(function() {
-				if ($("#allTime").is(":checked")) {
-					$("#startTime").value = "07:00";
-					$("#endTime").value = "21:00";
-				}
-			})
-
-		}) */
-
+		
 		//페이지 진입시 selectbox에 예약된 값 지정 
 		window.onload = function() {
 
@@ -285,15 +240,6 @@
 			$('#startTime').val(startTime).prop('selected', true);
 			$('#endTime').val(endTime).prop('selected', true);
 			$('#selectRoom').val(roomName).prop('selected', true);
-			
-			 //class="stTime"인 태그 
-			 /* let startList = $('.stTime');
-			    for(let i = 0; i < startList.length; i++){		
-			   	
-					if(startList[i].value === startTime){
-						 startList[i].prop('selected', true);
-					}		
-				} */
 
 		}
 			
