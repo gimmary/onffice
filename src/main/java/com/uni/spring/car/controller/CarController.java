@@ -37,11 +37,10 @@ public class CarController {
 	@Autowired
 	CarService carService;
 
-	// 차량 예약 진입
+	//차량 예약 진입
 	@RequestMapping("carReservingForm.do")
 	public String carReservingForm(HttpSession session, Model model) {
 
-		//차량 리스트
 		//예약용 직원명, 오늘 날짜
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		int userCNo = loginUser.getCNo();
@@ -52,6 +51,7 @@ public class CarController {
 		model.addAttribute("userJob", userJob);
 		model.addAttribute("userNo", userNo);
 				
+		//차량 리스트
 		ArrayList<Car> carList = carService.selectList(userCNo);
 		model.addAttribute("carList", carList);
 			
@@ -163,7 +163,7 @@ public class CarController {
 	}
 	
 	
-	// 차량 관리 진입
+	//차량 관리 진입
 	@RequestMapping("carSetting.do")
 	public String carSetting(HttpSession session, Model model,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
@@ -174,7 +174,7 @@ public class CarController {
 
 		int userCNo = loginUser.getCNo();
 
-		// 페이징 처리
+		//페이징
 		int listCount = carService.selectCarListCount(userCNo);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		model.addAttribute("pi", pi);
