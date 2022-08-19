@@ -9,7 +9,7 @@ public class MeetingRoom {
 	private int cNo;           //회사번호
 	
 	public MeetingRoom() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public String getRoomNo() {

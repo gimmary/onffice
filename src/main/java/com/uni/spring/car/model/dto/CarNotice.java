@@ -7,7 +7,7 @@ public class CarNotice {
 	private int cNo;
 	
 	public CarNotice() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	public int getRegistNo() {

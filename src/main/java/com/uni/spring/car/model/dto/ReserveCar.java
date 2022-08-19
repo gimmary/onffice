@@ -11,7 +11,7 @@ public class ReserveCar {
 	private int cNo;
 	
 	public ReserveCar() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	public int getReserveNo() {

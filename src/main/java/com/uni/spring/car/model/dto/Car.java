@@ -9,7 +9,7 @@ public class Car {
 	private int cNo;
 	
 	public Car() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	public int getNo() {

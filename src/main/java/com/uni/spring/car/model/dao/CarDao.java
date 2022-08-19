@@ -92,12 +92,12 @@ public class CarDao {
 	}
 
 	public int insertNotice(SqlSessionTemplate sqlsession, CarNotice cn) {
-		// TODO Auto-generated method stub
+
 		return sqlsession.insert("CarMapper.insertNotice", cn);
 	}
 
 	public CarNotice selectCarNotice(SqlSessionTemplate sqlsession, int cNo) {
-		// TODO Auto-generated method stub
+
 		return sqlsession.selectOne("CarMapper.selectCarNotice", cNo);
 	}
 

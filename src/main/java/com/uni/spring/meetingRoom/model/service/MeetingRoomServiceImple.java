@@ -54,11 +54,6 @@ public class MeetingRoomServiceImple implements MeetingRoomService {
 		return meetingRoomDao.selectList(sqlsession, userCNo);
 	}
 
-	/*
-	 * @Override public int deleteMeetingroom(String roomNo) { 
-	 * meetingroomDao.deleteMeetingroom(sqlsession, roomNo); }
-	 */
-
 	@Override
 	public int roomNoCheck(String roomNo) {
 		

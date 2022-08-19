@@ -61,16 +61,15 @@ public class CarController {
 		model.addAttribute("today", today);
 		
 		CarNotice cn = carService.selectCarNotice(userCNo);
+		String cNotice = cn.getNotice();
 		
-		if(cn == null) {
-			CarNotice n = new CarNotice();
-			n.setNotice("");
-			String notice = n.getNotice();
+		if(cNotice == null) {
+			cNotice = "";
+			String notice = cNotice;
 			model.addAttribute("notice", notice);
 			
 		}else {
-			String notice = cn.getNotice();
-			System.out.println("불러온 공지 : " + notice);
+			String notice = cNotice;
 			notice = notice.replace("\n", "<br>");
 			model.addAttribute("notice", notice);
 		}
@@ -101,10 +100,8 @@ public class CarController {
 		car.setcNo(userCNo);
 		
 		int result = carService.reserveingCar(car);
-		System.out.println("차량예약 : " + result);
 		carService.updateStatus(reserveCarNo); //해당 번호를 가진 차량 상태 업데이트
 		
-		//return new GsonBuilder().create().toJson(userNo);
 		return "";
 	}
 	
@@ -127,13 +124,8 @@ public class CarController {
 		carObj.addProperty("reserveJName", userJobName);
 		carObj.addProperty("useDate", car.getUseDate());
 		carObj.addProperty("useNote", car.getUseNote());
-		
-		/* JsonObject obj = carObj;
-		String str = obj.toString();
-		System.out.println("str : " + str); */
-		
+				
 		String str = carObj.toString();
-		System.out.println("str : " + str);
 		
 		return str; 
 		
@@ -155,7 +147,6 @@ public class CarController {
 		c.setUseNote(updateUseNote);
 		
 		int result = carService.updateReserveCar(c);
-		System.out.println("수정완료 : " + result);
 			
 		return ""; 
 		
@@ -189,20 +180,19 @@ public class CarController {
 		model.addAttribute("pi", pi);
 
 		ArrayList<Car> carList = carService.selectCarList(pi, userCNo);
-		System.out.println("차량 목록 : " + carList);
 		model.addAttribute("carList", carList);
 
 		CarNotice newCn = carService.selectCarNotice(userCNo);
+		String cNotice = newCn.getNotice();
 		
 		//등록된 공지가 없으면 빈 문자열로 설정해서 출력해줌
-		if(newCn == null) {
-			CarNotice n = new CarNotice();
-			n.setNotice("");
-			String noticeView = n.getNotice();
+		if(cNotice == null) {		
+			cNotice = "";
+			String noticeView = cNotice;
 			model.addAttribute("noticeView", noticeView);
+			
 		}else {
-			String noticeView = newCn.getNotice();
-			System.out.println("불러온 공지 : " + noticeView);
+			String noticeView = cNotice;
 			noticeView = noticeView.replace("<br>", "\n");
 			model.addAttribute("noticeView", noticeView);
 		}
@@ -240,7 +230,6 @@ public class CarController {
 		c.setcNo(userCNo);
 		
 		int result = carService.insertCar(c);
-		System.out.println("차량추가 : " + result);
 		
 		return new GsonBuilder().create().toJson(c);
 	}
@@ -254,7 +243,7 @@ public class CarController {
 		for (int i = 0; i < checkedArr.size(); i++) {
 			String carNo = checkedArr.get(i);
 			int result = carService.deleteCars(carNo);
-			System.out.println("삭제완료 : " + result);
+			
 		}
 
 		Member loginUser = (Member) session.getAttribute("loginUser");
@@ -264,61 +253,41 @@ public class CarController {
 		return new GsonBuilder().create().toJson(carList);
 	}
 	
-	//차량공지등록
-	/* @RequestMapping("carNotice.do")
-	public String carNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		
-		String notice = request.getParameter("carNotice");
-		notice = notice.replace("\r\n","<br>");
-		
-		Member loginUser = (Member) session.getAttribute("loginUser");
-		int cNo = loginUser.getCNo();
-		
-		//공지 저장
-		CarNotice cn = new CarNotice();
-		cn.setNotice(notice);
-		cn.setcNo(cNo);
-		
-		int insertResult = carService.insertNotice(cn);
-		System.out.println("공지저장완료 : " + insertResult);
-		
-		//저장한 공지 화면에 뿌리기
-		//가장 최근 등록된 공지 가져와서 공지내용만 뿌리기
-		CarNotice newCn = carService.selectCarNotice();
-		String noticeView = newCn.getNotice();
-		System.out.println("불러온 공지 : " + noticeView);
-		
-		request.setAttribute("notice", noticeView);
-		
-		//return "car/carSetting";
-		return "redirect:/carSetting.do";
-	} */
-	
+	//공지 등록
 	@RequestMapping(value = "carNotice.do", produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public String carNotice(@RequestParam("notice") String notice, HttpSession session, Model model) {
+		
+		if(notice == null) {
+			CarNotice cNotice = new CarNotice();
+			cNotice.setNotice("");
+			String noticeView = cNotice.getNotice();
 			
-		notice = notice.replace("\n", "<br>");
+			return new GsonBuilder().create().toJson(noticeView);
 		
-		Member loginUser = (Member) session.getAttribute("loginUser");
-		int cNo = loginUser.getCNo();
+		}else {
+			notice = notice.replace("\n", "<br>");
+			
+			Member loginUser = (Member) session.getAttribute("loginUser");
+			int cNo = loginUser.getCNo();
+			
+			//공지 저장
+			CarNotice cn = new CarNotice();
+			cn.setNotice(notice);
+			cn.setcNo(cNo);
+			
+			int insertResult = carService.insertNotice(cn);
+			
+			//저장한 공지 화면에 뿌리기
+			//가장 최근 등록된 공지 가져와서 공지내용만 뿌리기
+			CarNotice newCn = carService.selectCarNotice(cNo);
+			String noticeView = newCn.getNotice();
+			noticeView = noticeView.replace("<br>", "\n");
+			model.addAttribute("noticeView", noticeView);
+			
+			return new GsonBuilder().create().toJson(noticeView);
+			
+		}
 		
-		//공지 저장
-		CarNotice cn = new CarNotice();
-		cn.setNotice(notice);
-		cn.setcNo(cNo);
-		
-		int insertResult = carService.insertNotice(cn);
-		System.out.println("공지저장완료 : " + insertResult);
-		
-		//저장한 공지 화면에 뿌리기
-		//가장 최근 등록된 공지 가져와서 공지내용만 뿌리기
-		CarNotice newCn = carService.selectCarNotice(cNo);
-		String noticeView = newCn.getNotice();
-		System.out.println("불러온 공지 : " + noticeView);
-		noticeView = noticeView.replace("<br>", "\n");
-		model.addAttribute("noticeView", noticeView);
-		
-		return new GsonBuilder().create().toJson(noticeView);
 	}
 }

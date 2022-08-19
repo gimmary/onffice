@@ -12,7 +12,7 @@ public class ReserveRoom {
 	private int cNo;
 
 	public ReserveRoom() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public String getReserveNo() {
